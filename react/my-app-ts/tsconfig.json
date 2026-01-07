@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-, "src/test/messageLogin.test.ts"  ]
+, "src/test/login.test.ts"  ]
 }

@@ -1,17 +1,23 @@
-import {
-  ChakraProvider,
-  defaultSystem
-} from "@chakra-ui/react";
-
-import CardLogin from "./components/CardLogin";
-import Header from "./components/Header/Header";
+import { ChakraProvider, defaultSystem } from "@chakra-ui/react";
+import { BrowserRouter } from "react-router-dom";
+import { AppContextProvider } from "./components/AppContext";
+import { Layout } from "./components/Layout";
+import MainRoutes from "./routes";
+import { createLocalStorage, getAllLocalStorage } from "./services/storage";
 
 function App() {
+  !getAllLocalStorage() && createLocalStorage();
+
   return (
-    <ChakraProvider value={defaultSystem} >
-      <Header />
-      <CardLogin />
-    </ChakraProvider>
+    <BrowserRouter>
+      <AppContextProvider>
+        <ChakraProvider value={defaultSystem}>
+          <Layout>
+            <MainRoutes />
+          </Layout>
+        </ChakraProvider>
+      </AppContextProvider>
+    </BrowserRouter>
   );
 }
 
